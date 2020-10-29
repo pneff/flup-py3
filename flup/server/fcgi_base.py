@@ -290,16 +290,17 @@ class OutputStream(object):
 
     def _write(self, data):
         length = len(data)
+        start = 0
         while length:
             toWrite = min(length, self._req.server.maxwrite - FCGI_HEADER_LEN)
 
             rec = Record(self._type, self._req.requestId)
             rec.contentLength = toWrite
-            rec.contentData = data[:toWrite]
+            rec.contentData = data[start:start + toWrite]
             self._conn.writeRecord(rec)
 
-            data = data[toWrite:]
             length -= toWrite
+            start += toWrite
 
     def write(self, data):
         assert not self.closed
