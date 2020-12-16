@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 setup(
-    name = 'flup',
+    name = 'flup-py3',
     version = '1.0.4',
     packages = find_packages(),
     zip_safe = True,
